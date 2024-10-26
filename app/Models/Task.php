@@ -8,17 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     public $table = "tasks";
-    protected $filable = [
-        "title",
-        "description",
-        "duo_date",
-        "user_id",
-        "category_id"
-    ];
-    protected $hidden = [
-        "user_id",
-        "category_id"
-    ];
+    protected $fillable = ["title","description","is_done","duo_date","user_id","category_id"];
+    // protected $hidden = [
+    //     "user_id",
+    //     "category_id"
+    // ];
     use HasFactory;
 
     public function user(){
@@ -26,6 +20,6 @@ class Task extends Model
     }
 
     public function category(){
-        return $this->belongsTo(Category::class, "id", "category_id");
+        return $this->belongsTo(Category::class);
     }
 }

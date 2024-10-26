@@ -46,7 +46,16 @@ nav {
 
 .btn {
     padding: 20px 30px;
+    background-color: #ccc;
+    text-transform: uppercase;
     border-radius: 10px;
+    border: none;
+    transition: all .3s ease-in-out ;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
 a.btn {
@@ -56,6 +65,7 @@ a.btn {
 .btn-primary {
     background-color: var(--color-primary);
     color: white;
+
 }
 
 main {
@@ -83,7 +93,8 @@ h2 {
 hr.line-header {
     display: inline-block;
     flex: 1;
-    width: 50px;
+    width: 70px;
+    margin: 0 10px;
   
 }
 
@@ -125,6 +136,7 @@ hr.line-header {
     border: none;
     background-color: var(--background-white);
     font-weight: bold;
+    
 }
 
 .task-list {
@@ -141,12 +153,14 @@ hr.line-header {
     justify-content: space-between;
     padding: 30px 15px;
     border-bottom: 1px solid var(--background-light);
+    transition: all 0.3s ease-in-out;
 }
 
 .task:hover {
     background-color: var(--background-light);
-    transition: all;
-    transition-duration: 0.3s;
+    transform: scale(1.05);
+    border-radius: 5px;
+    
 }
 
 
@@ -170,7 +184,7 @@ hr.line-header {
 
 .actions {
     display: flex;
-    gap: 5px;
+    gap: 15px;
 }
 
 .sphere {
@@ -181,3 +195,74 @@ hr.line-header {
     border-radius: 50%;
 }
 
+.graph-info {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions img{
+    transition: all 0.3s ease-in-out;
+}
+
+.actions img:hover {
+    transform: scale(1.50);
+}
+
+.container-create{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+}
+
+.container-create h1 {
+    margin-bottom: 50px;
+}
+
+.input-area{
+    margin: 10px;
+}
+
+.container-create label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.container-create input,textarea, select {
+    background-color: white;
+    display: block;
+    width: 20rem;
+    max-width: 20rem;
+    max-height: 8rem;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #333;
+}
+
+.button-area {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+/* .button-area button {
+   padding: 15px;
+   background-color: var(--color-primary);
+   color: white;
+   border: none;
+   border-radius: 5px;
+  
+
+}
+
+.button-area button:hover {
+    cursor: pointer;
+    transform: scale(1.10); 
+
+
+} */
