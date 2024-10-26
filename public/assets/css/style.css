@@ -250,6 +250,10 @@ hr.line-header {
     margin-top: 50px;
 }
 
+#is-done {
+    cursor: pointer;
+}
+
 /* .button-area button {
    padding: 15px;
    background-color: var(--color-primary);

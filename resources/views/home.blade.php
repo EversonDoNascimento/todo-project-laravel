@@ -36,3 +36,12 @@
         </div>
     </section>
 </x-layout>
+<script>
+    const status = document.querySelectorAll("#form-is-done");
+    console.log(status);
+    status.forEach((item)=> {
+        item.addEventListener("click", () => { 
+         item.submit(); 
+        });
+    })
+</script>

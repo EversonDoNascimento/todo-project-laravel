@@ -1,12 +1,16 @@
 <div class="task">
     <div class="title">
-        <input
-        type="checkbox"
-        @if($data && $data['is_done']):
-            checked 
-        @endif
-        >
-        <div class="title-task">{{$data['title'] ?? "" }}</div>
+        <form method="get" id="form-is-done" action="{{route('task.is_done')}}">
+            <input type="hidden" name="id" value="{{$data['id']}}">
+            <input
+                id="is-done"
+                type="checkbox"
+                @if($data && $data['is_done']):
+                    checked 
+                @endif
+                >
+        </form>
+        <div  class="title-task">{{$data['title'] ?? "" }}</div>
     </div>
     <div class="priority">
         <div class="sphere"></div>
@@ -21,3 +25,4 @@
         </a>
     </div>
 </div>
+

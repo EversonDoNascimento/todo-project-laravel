@@ -31,13 +31,28 @@ class taskController extends Controller
     public function create_action(Request $request) {
         $data = $request->only(["title","duo_date","description","category_id"]);
         $data['user_id'] = 1;
-        $dbTask = Task::create($data);
+        Task::create($data);
         return  \redirect(route('home'));
     }
 
     public function edit_action(Request $request){
         $data = $request->only(["id","title","duo_date","description","category_id"]);
-        $task = Task::where("id", $data['id'])->update($data);
+        Task::where("id", $data['id'])->update($data);
         return \redirect(route("home"));
+    }
+
+    public function is_done(Request $request){
+        $id = $request->id;
+        $task = Task::find($id);
+        $is_done = $task->is_done;
+        $task->update(["is_done" => !$is_done]);
+        return \redirect(\route("home"));
+    }
+
+    public function delete(Request $request){
+        $id = $request->id;
+        $task = Task::find($id);
+        $task->delete();
+        return \redirect(\route("home"));
     }
 }
