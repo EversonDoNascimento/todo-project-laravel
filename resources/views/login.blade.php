@@ -1,8 +1,40 @@
-
-<x-layout page="Login">
+<x-layout page="Criar tarefa">
     <x-slot:btn>
-        <a href="{{route('register')}}" class="btn btn-primary">
-                    Registre-se
+        <a href="{{route('home')}}" class="btn btn-primary">
+                    Home
         </a>
     </x-slot:btn>
+    <section class="container-create">
+     
+        <h1>Login</h1>
+        @if($errors->all())
+            <ul class="alert-errors">
+                @forEach($errors->all() as $error)   
+                    <li>{{$error}}</li>
+                @endForEach
+            </ul>
+        @endif
+        <form method="post" action="{{route('user.login_action')}}">
+            @csrf
+            <x-form.input  
+                label="Seu email" 
+                type="email" 
+                name="email" 
+                required="required" 
+                placeholder="Digite seu email" >
+            </x-form.input>
+            <x-form.input  
+                label="Sua senha" 
+                type="password" 
+                name="password" 
+                required="required" 
+                placeholder="Digite sua senha" >
+            </x-form.input>
+            <div class="button-area">
+                <x-form.btn type="reset" value="Limpar"></x-form.btn>
+                <x-form.btn type="submit" value="Login"></x-form.btn> 
+            </div>
+    
+        </form>
+    </section>
 </x-layout>
