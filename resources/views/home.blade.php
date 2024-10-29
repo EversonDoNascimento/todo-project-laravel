@@ -14,7 +14,7 @@
             <hr class="line-header" />
             Data
         </div>
-        <div class="graph-header-subtitle">Tarefas: <b>6/3</b></div>
+        <div class="graph-header-subtitle">Tarefas: <b id="finished-tasks">{{count($tasks)}}/{{$qtdTasksFinished}}</b></div>
         <div class="graph-area">
             <div class="graph-placeholder">
         </div>
@@ -22,7 +22,7 @@
         <div class="graph-info">
             <div> <img src="/assets/images/icon-info.png" alt=""></div>
             
-            <span>Restam 3 tarefas a serem realizadas</span>
+            <span id="remaining-tasks">Restam {{count($tasks) - $qtdTasksFinished}} tarefas a serem realizadas</span>
         </div>
 
     </section>
@@ -40,11 +40,42 @@
     </section>
 </x-layout>
 <script>
-    const status = document.querySelectorAll("#form-is-done");
-    console.log(status);
-    status.forEach((item)=> {
-        item.addEventListener("click", () => { 
-         item.submit(); 
-        });
+   const updateStatus = async (element) => {
+    // Selecting elements, that will have dynamic values
+    const finishedTasksEl = document.querySelector("#finished-tasks");
+    const remainingTasks = document.querySelector("#remaining-tasks");
+    // Splitting the element value by '/', and creating variables with array values
+    const [total, finished] = finishedTasksEl.innerText.split("/");
+    // Getting task status
+    let status = element.checked;
+    // Getting task id
+    let id = element.dataset.id;
+    // Defining the base url for requisition
+    const url = "{{route('task.is_done')}}"
+    const request = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+            "accept": "application/json"
+        },
+        // The csrf_token must be send in the requisition
+        body: JSON.stringify({status,id,_token: "{{csrf_token()}}"})
     })
+    const result = await request.json();
+    if(result.success){
+        alert("Status atualizado com sucesso!");
+        // Verify if status is true or false
+        if(status){ 
+            finishedTasksEl.innerText = `${total}/${+finished + 1}`;      
+            remainingTasks.innerText = `Restam ${total - (+finished + 1)} tarefas  a serem realizadas`;
+        }else{
+            finishedTasksEl.innerText = `${total}/${+finished - 1}`;
+            remainingTasks.innerText = `Restam ${total - (+finished - 1)} tarefas  a serem realizadas`;
+        }
+ 
+    }
+    else{
+        element.checked = !status;
+    }
+   }
 </script>

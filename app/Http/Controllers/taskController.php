@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class taskController extends Controller
 {
@@ -30,7 +31,8 @@ class taskController extends Controller
 
     public function create_action(Request $request) {
         $data = $request->only(["title","duo_date","description","category_id"]);
-        $data['user_id'] = 1;
+        $id = Auth::User()['id'];
+        $data['user_id'] = $id;
         Task::create($data);
         return  \redirect(route('home'));
     }
@@ -43,10 +45,13 @@ class taskController extends Controller
 
     public function is_done(Request $request){
         $id = $request->id;
+        $status = $request->status;
         $task = Task::find($id);
-        $is_done = $task->is_done;
-        $task->update(["is_done" => !$is_done]);
-        return \redirect(\route("home"));
+        if(!$task){
+            return ["success" => false];
+        }
+        $task->update(["is_done" => $status]);
+        return ["success" => true];
     }
 
     public function delete(Request $request){

@@ -1,15 +1,16 @@
 <div class="task">
     <div class="title">
-        <form method="get" id="form-is-done" action="{{route('task.is_done')}}">
-            <input type="hidden" name="id" value="{{$data['id']}}">
+     
             <input
                 id="is-done"
                 type="checkbox"
+                data-id="{{$data['id']}}"
+                onchange="updateStatus(this)"
                 @if($data && $data['is_done']):
                     checked 
                 @endif
                 >
-        </form>
+      
         <div  class="title-task">{{$data['title'] ?? "" }}</div>
     </div>
     <div class="priority">
@@ -26,3 +27,5 @@
     </div>
 </div>
 
+   <!-- <form method="get" id="form-is-done" action="{{route('task.is_done')}}">
+            <input type="hidden" name="id" value="{{$data['id']}}"> -->

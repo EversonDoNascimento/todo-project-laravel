@@ -14,7 +14,7 @@ Route::middleware("auth")->group(function (){
     Route::post("/task/create_action", [taskController::class, "create_action"])->name("task.create_action");
     Route::get("/task/edit", [taskController::class, "edit"])->name("task.edit");
     Route::post("/task/edit_action", [taskController::class, "edit_action"])->name("task.edit_action");
-    Route::get("/task/is_done", [taskController::class, "is_done"])->name("task.is_done");
+    Route::post("/task/is_done", [taskController::class, "is_done"])->name("task.is_done");
     Route::get("/task/delete", [taskController::class, "delete"])->name("task.delete");
     Route::get("/logout", [authController::class, "logout"])->name("user.logout");
 });
