@@ -254,6 +254,44 @@ hr.line-header {
     cursor: pointer;
 }
 
+.container-date{
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.button-date {
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+.button-date:hover{
+    transform: scale(1.5);
+}
+
+.button-date-prev {
+    rotate: 130deg;  
+}
+
+.button-date-next {
+    rotate: 130deg;
+    border-right: none; 
+    border-bottom: none;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+}
+
+#dateScreen:before {
+    content: "";
+    border-bottom: 2px solid black;
+    width: 4px;
+    height: 4px;
+}
+
 /* .button-area button {
    padding: 15px;
    background-color: var(--color-primary);

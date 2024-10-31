@@ -12,9 +12,13 @@
         <div>                    
             <h2>Progresso do Dia</h2>
             <hr class="line-header" />
-            Data
+            <div class="container-date">
+                <a href="{{route('home', ['date' => $data['date_prev_button']])}}"><div class="button-date button-date-prev"></div></a>
+                <span id="dateScreen">{{$data["date_as_string"]?? ""}}</span>
+                <a href="{{route('home',['date' => $data['date_next_button']])}}"><div class="button-date button-date-next"></div></a>
+            </div>
         </div>
-        <div class="graph-header-subtitle">Tarefas: <b id="finished-tasks">{{count($tasks)}}/{{$qtdTasksFinished}}</b></div>
+        <div class="graph-header-subtitle">Tarefas: <b id="finished-tasks">{{count($data['tasks'])}}/{{$data['qtdTasksFinished']}}</b></div>
         <div class="graph-area">
             <div class="graph-placeholder">
         </div>
@@ -22,7 +26,7 @@
         <div class="graph-info">
             <div> <img src="/assets/images/icon-info.png" alt=""></div>
             
-            <span id="remaining-tasks">Restam {{count($tasks) - $qtdTasksFinished}} tarefas a serem realizadas</span>
+            <span id="remaining-tasks">Restam {{count($data['tasks']) - $data['qtdTasksFinished']}} tarefas a serem realizadas</span>
         </div>
 
     </section>
@@ -33,24 +37,98 @@
             </select>
         </div>
         <div class="task-list">
-        @foreach($tasks as $task)
+        @foreach($data['tasks'] as $task)
             <x-task :data=$task/>
         @endforeach
         </div>
     </section>
 </x-layout>
 <script>
+
+//     const buttonsAlterDays = {
+//         prevDay: document.querySelector(".button-date-prev"),
+//         nextDay: document.querySelector(".button-date-next") 
+//     }
+//     const dateEl = document.querySelector("#dateScreen");
+//     const months = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+//     let countD = 0;
+//     // Function return the value of total days of mounth
+//    const getLastDayOfMonth = (date) => {
+//     // 2024, 9 + 1, 0
+//         const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+//         return lastDay.getDate();
+//    }
+
+
+//     const updateDate = (currentDate, days) => {
+//         // Sum the current day with days
+//         currentDate.setDate(currentDate.getDate() + days);
+//         // Get the max quantity of days in the Month
+//         const maxDaysInMonth =  getLastDayOfMonth(currentDate);
+//         // Verifying if the current date is less than the max days month
+//         if(currentDate.getDate() > maxDaysInMonth){
+//             currentDate.setDate(maxDaysInMonth);
+//         }
+//         return currentDate;
+//     }
+
+//     const requestTasks = async (fullDate) => {
+//         const url = "/";
+//         // const data = await fetch(url, {
+//         //     method: "GET",
+//         //     headers: {
+//         //         'Content-type': 'application/json',
+//         //         'accept':'application/json'
+//         //     },
+//         //     body: {fullDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`, _token: "{{csrf_token()}}"}
+//         // })
+
+//         const data = fetch("/?date=2024-10-30");
+//         const result = await data;
+//         console.log(result);
+
+//     }
+//     buttonsAlterDays.nextDay.addEventListener("click", () => {
+//         countD++;
+//         let fullDate = {
+//             day: updateDate(new Date(), countD).getDate(),
+//             month: updateDate(new Date(), countD).getMonth(),
+//             year: updateDate(new Date(), countD).getFullYear()
+//         }
+//         dateEl.innerHTML = `${fullDate.day} ${months[fullDate.month]} de ${fullDate.year}`;
+//         requestTasks(fullDate);
+//     })
+//     buttonsAlterDays.prevDay.addEventListener("click", () => {
+//         countD--;
+//         let fullDate = {
+//             day: updateDate(new Date(), countD).getDate(),
+//             month: updateDate(new Date(), countD).getMonth(),
+//             year: updateDate(new Date(), countD).getFullYear()
+//         }
+//         dateEl.innerHTML = `${fullDate.day} ${months[fullDate.month]} de ${fullDate.year}`;
+//         requestTasks(fullDate);
+//     })
+
+   
+
+
+//     let dateMonth = new Date().getMonth();
+//     let day = new Date().getDate();
+//     let year = new Date().getFullYear();
+//     dateEl.innerHTML = `${day} ${months[dateMonth]} de ${year}`;
+
+
    const updateStatus = async (element) => {
-    // Selecting elements, that will have dynamic values
+    // By Selecting elements, that will have dynamic values
     const finishedTasksEl = document.querySelector("#finished-tasks");
     const remainingTasks = document.querySelector("#remaining-tasks");
-    // Splitting the element value by '/', and creating variables with array values
+    // By Splitting the element value by '/', and creating variables with array values
     const [total, finished] = finishedTasksEl.innerText.split("/");
-    // Getting task status
+    // By Getting task status
     let status = element.checked;
-    // Getting task id
+    // By Getting task id
     let id = element.dataset.id;
-    // Defining the base url for requisition
+    // By Defining the base url for requisition
     const url = "{{route('task.is_done')}}"
     const request = await fetch(url, {
         method: "POST",
