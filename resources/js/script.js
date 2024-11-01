@@ -1,56 +1,3 @@
-
-<x-layout>
-    <x-slot:btn>
-        <a href="{{route('task.create')}}" class="btn btn-primary">
-                Criar Tarefa
-        </a>
-        <a style="margin-left: 10px;" href="{{route('user.logout')}}" class="btn btn-primary">
-                Sair
-        </a>
-    </x-slot:btn>
-    <section class="graph">
-        <div>                    
-            <h2>Progresso do Dia</h2>
-            <hr class="line-header" />
-            <div class="container-date">
-                <a href="{{route('home', ['date' => $data['date_prev_button']])}}"><div class="button-date button-date-prev"></div></a>
-                <span id="dateScreen">{{$data["date_as_string"]?? ""}}</span>
-                <a href="{{route('home',['date' => $data['date_next_button']])}}"><div class="button-date button-date-next"></div></a>
-            </div>
-        </div>
-        <div class="graph-header-subtitle">Tarefas: <b id="finished-tasks">{{count($data['tasks'])}}/{{$data['qtdTasksFinished']}}</b></div>
-        <div class="graph-area">
-            <div class="graph-placeholder">
-                <div class="circle" style="--percent: 50">
-                    <div>
-                        {{count($data['tasks']) > 0 ? round($data['qtdTasksFinished']/count($data['tasks']) * 100) : 0}}%
-                    </div>            
-                </div> 
-            </div>
-        </div>
-        <div class="graph-info">
-            <div> <img src="/assets/images/icon-info.png" alt=""></div>
-            
-            <span id="remaining-tasks">Restam {{count($data['tasks']) - $data['qtdTasksFinished']}} tarefas a serem realizadas</span>
-        </div>
-
-    </section>
-    <section class="list">
-        <div class="list-header">
-            <select class="list-header-select" name="" id="">
-                <option value="1">Todas as tarefas</option>
-            </select>
-        </div>
-        <div class="task-list">
-        @foreach($data['tasks'] as $task)
-            <x-task :data=$task/>
-        @endforeach
-        </div>
-    </section
-    
-</x-layout>
-<script>
-
 //     const buttonsAlterDays = {
 //         prevDay: document.querySelector(".button-date-prev"),
 //         nextDay: document.querySelector(".button-date-next") 
@@ -123,6 +70,7 @@
 //     let year = new Date().getFullYear();
 //     dateEl.innerHTML = `${day} ${months[dateMonth]} de ${year}`;
 
+window.onload = () => {
 let count = 0;
 let calcPercent;
 const renderPercent = (value, action = "add") => {
@@ -193,4 +141,6 @@ const renderPercent = (value, action = "add") => {
     }
    }
 
-</script>
+
+}
+

@@ -24,7 +24,7 @@ class homeController extends Controller
         $data['date_prev_button'] = $carbonDate->addDay(-1)->format('Y-m-d');
         $data['date_next_button'] = $carbonDate->addDay(2)->format('Y-m-d');
         $data['tasks'] = Task::where('user_id','=',$userId)->whereDate('duo_date', $fullDate)->get();
-        $data['qtdTasksFinished'] = \count(Task::where('user_id','=',$userId)->where('is_done', '=', true)->whereDate('duo_date', \date("Y-m-d"))->get());
+        $data['qtdTasksFinished'] = \count(Task::where('user_id','=',$userId)->where('is_done', '=', true)->whereDate('duo_date', $fullDate)->get());
         return view('home',['data' => $data]);
     }
 }

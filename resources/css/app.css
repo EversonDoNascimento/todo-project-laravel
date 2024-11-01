@@ -1,7 +1,8 @@
 :root {
-    --background-light: #F0F2FA;
+    --background-light: #C1BCEC;
     --background-white: #F6F5FF;
     --text-dark: #0A0040;
+    --color-primary: #6143FF;
 }
 
 * {
@@ -15,5 +16,333 @@
 body {
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    background-color: var(--background-white);
+}
+
+.container  {
+    width: 100%;
+    height: 100%;
+    display: flex;  
+}
+
+.sidebar {
+    width: 100px;
+    background-color: var(--color-primary);
+}
+
+.sidebar img {
+    max-width: 100%;
+}
+
+nav {
+    height: 100px;
+    background-color: var(--background-light);
+    width: calc(100vw - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 20px;
+}
+
+.btn {
+    padding: 20px 30px;
+    background-color: #ccc;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: none;
+    transition: all .3s ease-in-out ;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+a.btn {
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+
+}
+
+main {
+    display: flex;
+    padding: 20px;
+}
+
+section.graph {
+    width: 33%;
+    height: 100%;
+
+    
+}
+
+.graph-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+h2 {
+    flex: 1;
+    display: inline-block;
+}
+
+hr.line-header {
+    display: inline-block;
+    flex: 1;
+    width: 70px;
+    margin: 0 10px;
+  
+}
+
+.graph-header-subtitle {
+    margin-top: 10px;
+}
+
+.graph-placeholder { 
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.graph-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.graph-header-tasks-left{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.list {
+    padding: 5px 15px;
+    flex: 1;
+}
+
+.list-header{
+    display: flex;
+}
+
+.list-header-select {
+    border: none;
+    background-color: var(--background-white);
+    font-weight: bold;
+    
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 15px;
+    border-bottom: 1px solid var(--background-light);
+    transition: all 0.3s ease-in-out;
+}
+
+.task:hover {
+    background-color: var(--background-light);
+    transform: scale(1.05);
+    border-radius: 5px;
+    
+}
+
+
+.task .title-priority,.title-task {
+    margin-left: 5px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.priority {
+    display: flex;
+    flex: 1;
+    
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+}
+
+.sphere {
+    background-color: #ff0000;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.graph-info {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions img{
+    transition: all 0.3s ease-in-out;
+}
+
+.actions img:hover {
+    transform: scale(1.50);
+}
+
+.container-create{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+}
+
+.container-create h1 {
+    margin-bottom: 50px;
+}
+
+.input-area{
+    margin: 10px;
+}
+
+.container-create label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.container-create input,textarea, select {
+    background-color: white;
+    display: block;
+    width: 20rem;
+    max-width: 20rem;
+    max-height: 8rem;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #333;
+}
+
+.button-area {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#is-done {
+    cursor: pointer;
+}
+
+.container-date{
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.button-date {
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+.button-date:hover{
+    transform: scale(1.5);
+}
+
+.button-date-prev {
+    rotate: 130deg;  
+}
+
+.button-date-next {
+    rotate: 130deg;
+    border-right: none; 
+    border-bottom: none;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+}
+
+#dateScreen:before {
+    content: "";
+    border-bottom: 2px solid black;
+    width: 4px;
+    height: 4px;
+}
+
+/* .button-area button {
+   padding: 15px;
+   background-color: var(--color-primary);
+   color: white;
+   border: none;
+   border-radius: 5px;
+  
+
+}
+
+.button-area button:hover {
+    cursor: pointer;
+    transform: scale(1.10); 
+
+
+} */
+
+/* @keyframes circleAnimation {
+    0%{
+        border-top: 0;
+    }
+    100%{
+        border-top: 15px solid var(--color-primary);
+    }
+} */
+
+.circle {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    
+}
+
+
+
+
+.circle div {
+    width: 85%;
+    height: 85%;
+    background-color: var(--background-white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
